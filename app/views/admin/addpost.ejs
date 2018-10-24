@@ -1,0 +1,183 @@
+<% include layouts/header %>
+        <!-- end header -->
+        <!-- start page container -->
+        <div class="page-container">
+ 			<!-- start sidebar menu -->
+ 			<% include layouts/sidebar %>
+			 <!-- end sidebar menu -->
+			<!-- start page content -->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title"><%= page%></div>
+                            </div>
+                            <ol class="breadcrumb page-breadcrumb pull-right">
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="/">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li class="active"><%= page%></li>
+                            </ol>
+                        </div>
+                    </div>
+                
+            <!-- add content here -->
+            <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card card-topline-aqua">
+                            <div class="card-head">
+                                <header>Vui lòng điền đầy đủ !!</header>
+                            </div>
+                            <form enctype="multipart/form-data" action="#"  method="POST" id="form" >
+                                    <div class="card-body row">
+                                            <div class="col-lg-8 p-t-20" id="thongbao">
+
+                                            </div>
+                                            <div class="col-lg-6 p-t-20">
+                                                    <div class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-width">
+                                                            <input class = "mdl-textfield__input" type = "text" id = "text4" name="tieude">
+                                                            <label class = "mdl-textfield__label" for = "text4"><b>Nhập tiêu đề bài viết</b></label>
+        
+                                                    </div>
+                                                    
+                                            </div>
+                                            
+                                            <div class="col-lg-12 p-t-20"> 
+                                                    <div class = "mdl-textfield mdl-js-textfield txt-full-width">
+                                                       <textarea class = "mdl-textfield__input" rows =  "5"  
+                                                          name="noidung" id="noidung"></textarea>
+                                                       <label class = "mdl-textfield__label" for = "text7"><b>Nội Dung bài viết</b></label>
+                                                    </div>
+                                                    
+                                            </div>
+                                           
+                                            <div class="col-lg-6 p-t-20"> 
+                                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height select-width">
+                                                          <input class="mdl-textfield__input" type="text" id="sample2"  name="theloai" value="India" readonly tabIndex="-1">
+                                                          <label for="sample2" class="pull-right margin-0">
+                                                              <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+                                                          </label>
+                                                          <label for="sample2" class="mdl-textfield__label"><b>Thuộc thể loại nào ?</b></label>
+                                                          <ul data-mdl-for="sample2" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                                                              <li class="mdl-menu__item" data-val="DE">Trung Hiếu</li>
+                                                              <li class="mdl-menu__item" data-val="BY">admin</li>
+                                                              <li class="mdl-menu__item" data-val="RU">Germany</li>
+                                                          </ul>
+                                                      </div>
+                                            </div>
+                                           
+                                            <div class="col-lg-6 p-t-20">
+                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth select-width">
+                                                <input class="mdl-textfield__input" type="text" name="menu" id="sample1" value="Học"
+                                                    readonly tabIndex="-1">
+                                                    <label for="sample2" class="pull-right margin-0">
+                                                        <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+                                                    </label>
+                                                <label for="sample1" class="mdl-textfield__label">Thuộc menu</label>
+                                                <ul data-mdl-for="sample1" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                                                    <li class="mdl-menu__item" data-val="DE">Trung Hiếu</li>
+                                                    <li class="mdl-menu__item" data-val="BY">admin</li>
+                                                    <li class="mdl-menu__item" data-val="RU">Germany</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                           <div class="col-lg-6 p-t-20" style="margin-top: 40px">
+                                              
+                                                <img id="imgId" src="https://via.placeholder.com/300x200" style="width:300px;height:200px; border:1px solid #0a75cc">
+                                                <input type="file" id='inputId' name="anhthumb">
+                                                
+                                           </div>
+                                          
+                                           <script>
+
+                                                /**
+                                                 * @param {domElement} input - The input element
+                                                 * @param {string} typeData - The type of data to be return in the event object. 
+                                                 */
+                                                 function loadFileFromInput(input,typeData) {
+                                                    var reader,
+                                                        fileLoadedEvent,
+                                                        files = input.files;
+                                                
+                                                    if (files && files[0]) {
+                                                        reader = new FileReader();
+                                                
+                                                        reader.onload = function (e) {
+                                                            fileLoadedEvent = new CustomEvent('fileLoaded',{
+                                                                detail:{
+                                                                    data:reader.result,
+                                                                    file:files[0]  
+                                                                },
+                                                                bubbles:true,
+                                                                cancelable:true
+                                                            });
+                                                            input.dispatchEvent(fileLoadedEvent);
+                                                        }
+                                                        switch(typeData) {
+                                                            case 'arraybuffer':
+                                                                reader.readAsArrayBuffer(files[0]);
+                                                                break;
+                                                            case 'dataurl':
+                                                                reader.readAsDataURL(files[0]);
+                                                                break;
+                                                            case 'binarystring':
+                                                                reader.readAsBinaryString(files[0]);
+                                                                break;
+                                                            case 'text':
+                                                                reader.readAsText(files[0]);
+                                                                break;
+                                                        }
+                                                    }
+                                                }
+                                                function fileHandler (e) {
+                                                    var data = e.detail.data,
+                                                        fileInfo = e.detail.file;
+                                                
+                                                    img.src = data;
+                                                }
+                                                var input = document.getElementById('inputId'),
+                                                    img = document.getElementById('imgId');
+                                                
+                                                input.onchange = function (e) {
+                                                    loadFileFromInput(e.target,'dataurl');
+                                                };
+                                                
+                                                input.addEventListener('fileLoaded',fileHandler)
+                                                </script>
+                                            <div class="col-lg-12 p-t-20"> 
+        
+                                                    <button type="submit" class="btn btn-circle btn-default btn-lg m-b-10" id="thembaiviet">
+                                                            <i class="fa fa-plus"></i>Thêm bài viết</button>
+                                            </div>
+                                             
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+           <!-- add content here -->
+           </div>
+           </div>
+           <!-- end page content -->
+           <!-- start chat sidebar -->
+          
+           <!-- end chat sidebar -->
+       </div>
+       <!-- end page container -->
+       <!-- start footer -->
+       <% include layouts/footer %> 
+
+
+       <script>
+       $(function() {
+        $('#noidung').froalaEditor({
+          // Set the file upload URL.
+          imageUploadURL: 'imguploads',
+          imageUploadParams: {
+            id: 'my_editor'
+          }
+         
+        })
+      });
+      </script>
+      <script src="/assets/js/forme.js" ></script>
